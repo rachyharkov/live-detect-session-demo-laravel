@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Authenticated!</title>
+    <title>Login</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
@@ -10,17 +10,21 @@
 <body>
     <div class="main">
         {{-- <input type="checkbox" id="chk" aria-hidden="true"> --}}
+        @if(session('error'))
+            <div style="color: red; font-size: 20px; margin-bottom: 20px; text-align: center; width: 100%;">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <div class="signup">
-            <form>
-                <label for="chk" aria-hidden="true">Welcome!</label>
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <h1>{{ Auth::user()->name }}</h1>
-                </div>
-                <form method="POST" action="{{ route('auth.destroy', 'owo') }}">
+            <form method="POST" action="{{ route('auth.store') }}">
+                <label for="chk" aria-hidden="true">Login</label>
+                <div style="display: flex; flex-direction: column;">
                     @csrf
-                    <button>Logout</button>
-                </form>
+                    <input type="email" name="email" placeholder="Email" required="">
+                    <input type="password" name="password" placeholder="Password" required="">
+                    <button type="submit">Enter</button>
+                </div>
             </form>
         </div>
 

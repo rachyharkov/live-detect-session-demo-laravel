@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        if (Auth::check()) {
+            return redirect('home');
+        }
+
+        return view('login');
+    }
+    /**
      * Operation for login
      */
     public function store(Request $request)
@@ -34,6 +45,8 @@ class AuthController extends Controller
      */
     public function destroy(string $id)
     {
+        // dd('logout');
+
         Auth::logout();
         return redirect('/');
     }
