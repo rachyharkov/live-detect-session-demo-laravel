@@ -32,6 +32,8 @@ class AuthController extends Controller
         ];
 
         if (Auth::Attempt($data)) {
+            // set session
+            $request->session()->put('expires_at', date('Y-m-d H:i:s', strtotime('+25 seconds')));
             return redirect('home');
         }else{
             Session::flash('error', 'Email atau Password Salah');

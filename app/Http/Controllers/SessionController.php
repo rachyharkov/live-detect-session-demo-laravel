@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if (Auth::check()) {
+        if ($request->session()->has('expires_at') && $request->session()->get('expires_at') > date('Y-m-d H:i:s')) {
             return response()->json([
                 'status' => 'ok',
+                'expired_at' => $request->session()->get('expires_at'),
+                'now' => date('Y-m-d H:i:s'),
             ]);
         }
 

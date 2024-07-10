@@ -19,7 +19,7 @@
 
                 {{-- show session expired --}}
                 <h3>
-                    Your session will expire in few seconds.
+                    your session will expire in 25 seconds
                 </h3>
             </div>
             <form method="POST" action="{{ route('auth.destroy', 'owo') }}" id="logout-form" x-data x-on:submit="clearTimeout(timer)">
